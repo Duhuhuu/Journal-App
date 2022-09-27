@@ -16,7 +16,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
           >
               <Toolbar>
                   <Typography variant='h6' noWrap component='div'>
-                      Fernando Herrera
+                      Duhuhuu
                   </Typography>
               </Toolbar>
               <Divider />
