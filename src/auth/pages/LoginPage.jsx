@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { Google } from "@mui/icons-material"
 
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
-import { checkingAuthentication, startGoogleSignIn } from '../../store/auth';
+import { startGoogleSignIn, startLoginWithEmailPassword } from '../../store/auth';
 
 export const LoginPage = () => {
 
-  const { status } = useSelector( state => state.auth );
+  const { status, errorMessage } = useSelector( state => state.auth );
 
 
 
@@ -27,8 +27,9 @@ export const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log({email, password});
-    dispatch(checkingAuthentication() );
+    // console.log({email, password});
+
+    dispatch(startLoginWithEmailPassword({ email, password }) );
   }
 
   const onGoogleSignIn = () =>{
@@ -64,7 +65,18 @@ export const LoginPage = () => {
                 />
             </Grid>
 
-            <Grid container spacing= { 2 } sx={{ mb:2, mt:1 }} >
+            <Grid 
+              container
+              display={ !!errorMessage ? '': 'none' }
+              sx={{ mt: 2 }}>
+              <Grid 
+                  item 
+                  xs={ 12 }
+                >
+                <Alert severity='error'>{ errorMessage }</Alert>
+              </Grid>
+            </Grid>
+            <Grid container spacing= { 1 } sx={{ mb:1, mt:1 }} >
               <Grid item xs={ 12 } sm={6} >
                   <Button 
                   disabled= {isAuthenticating }
@@ -86,6 +98,7 @@ export const LoginPage = () => {
                     <Typography sx= {{ml:1}} >Google</Typography>
                   </Button>
               </Grid>
+              
             </Grid>
             <Grid container direction='row' justifyContent='end'>
               <Link component={ RouterLink } color='inherit' to="/auth/register" >
