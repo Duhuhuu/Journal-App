@@ -14,7 +14,7 @@ const formData = {
   displayName: ''
 
 }
-
+//Modo de validaciones con un objeto teniendo una validacion y un mensaje de error
 const formValidations = {
   email: [(value) => value.includes('@'), 'El correo debe de tener una @ '],
   password: [(value) => value.length >= 6, 'El password debe de tener mas de 6 letras'],
