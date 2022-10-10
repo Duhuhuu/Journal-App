@@ -36,7 +36,7 @@ export const LoginPage = () => {
     dispatch(startGoogleSignIn());
     console.log('OnGoogleSignIn ')
   }
-
+ 
   return (
     <AuthLayout title="Login" >
         <form onSubmit ={ onSubmit }   className= 'animate__animated animate__fadeIn animate__faster' >
