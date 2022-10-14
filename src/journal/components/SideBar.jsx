@@ -1,12 +1,11 @@
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from "@mui/material";
 import { TurnedInNot } from "@mui/icons-material";
 import { useSelector } from "react-redux";
+import { SideBarItem } from "./SideBarItem";
 export const SideBar = ({ drawerWidth = 240 }) => {
     
    const { displayName } = useSelector(state => state.auth);
    const { notes } = useSelector( state => state.journal );
-
-   console.log(notes)
 
     return (
       <Box
@@ -31,17 +30,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
               <List>
                   {
                       notes.map( note => (
-                          <ListItem key={ note.id } disablePadding>
-                              <ListItemButton>
-                                  <ListItemIcon>
-                                      <TurnedInNot />
-                                  </ListItemIcon>
-                                  <Grid container>
-                                      <ListItemText primary={ note.title } />
-                                      <ListItemText secondary={ 'Exercitation cillum irure elit consectetur.' } />
-                                  </Grid>
-                              </ListItemButton>
-                          </ListItem>
+                        <SideBarItem key={note.id} {...note} />
                       ))
                   }
               </List>
